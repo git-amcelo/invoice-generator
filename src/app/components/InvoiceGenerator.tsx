@@ -63,6 +63,7 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
   const [savedInvoices, setSavedInvoices] = useState<InvoiceData[]>([]);
   const [editingInvoice, setEditingInvoice] = useState<InvoiceData | null>(null);
   const [logo, setLogo] = useState<string>('');
+  const [showLogo, setShowLogo] = useState<boolean>(true);
   const logoInputRef = useRef<HTMLInputElement>(null);
 
   const [invoice, setInvoice] = useState<InvoiceData>({
@@ -248,12 +249,14 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
     setInvoice(duplicated);
     setEditingInvoice(null);
     setShowPreviousInvoices(false);
+    setShowLogo(false); // Hide logo when viewing previous invoice
   };
 
   const editInvoice = (inv: InvoiceData) => {
     setInvoice(inv);
     setEditingInvoice(inv);
     setShowPreviousInvoices(false);
+    setShowLogo(false); // Hide logo when viewing previous invoice
   };
 
   const exportToPDF = async () => {
@@ -298,6 +301,7 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
       bankDetails: localStorage.getItem('bankDetails') || '',
     });
     setEditingInvoice(null);
+    setShowLogo(true);
   };
 
   // Prevent hydration mismatch by not rendering until mounted
@@ -399,22 +403,40 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
         {/* Invoice Form - Full Width Modern Card */}
         <div className="modern-card rounded-medium p-6 shadow-2xl w-full">
           {/* Logo Upload - Separate Section */}
-          <div className="mb-6">
-            <input
-              type="file"
-              ref={logoInputRef}
-              onChange={handleLogoUpload}
-              accept="image/*"
-              className="hidden"
-            />
-            <button
-              onClick={() => logoInputRef.current?.click()}
-              className="button-magnetic bg-accent-blue hover:bg-accent-indigo text-white px-4 py-2 rounded-smooth font-semibold font-sans-tight transition-all"
-            >
-              {logo ? 'Change Logo' : 'Upload Logo'}
-            </button>
+          <div className="mb-6 flex flex-wrap items-center gap-4 border-b border-slate pb-6">
+            <div className="flex flex-col gap-2">
+              <input
+                type="file"
+                ref={logoInputRef}
+                onChange={handleLogoUpload}
+                accept="image/*"
+                className="hidden"
+              />
+              <button
+                onClick={() => logoInputRef.current?.click()}
+                className="button-magnetic bg-secondary-slate hover:bg-black text-white px-4 py-2 rounded-smooth font-semibold font-sans-tight transition-all text-sm"
+              >
+                {logo ? 'CHANG_LOGO' : 'UPLOAD_LOGO'}
+              </button>
+            </div>
+
             {logo && (
-              <img src={logo} alt="Company Logo" className="mt-3 h-16 object-contain" />
+              <div className="flex items-center gap-6 bg-primary-slate p-3 rounded-smooth border border-slate">
+                <img src={logo} alt="Company Logo" className="h-12 object-contain" />
+                <label className="flex items-center gap-3 cursor-pointer group">
+                  <div className="relative">
+                    <input
+                      type="checkbox"
+                      checked={showLogo}
+                      onChange={(e) => setShowLogo(e.target.checked)}
+                      className="sr-only peer"
+                    />
+                    <div className="w-10 h-5 bg-gray-300 rounded-full peer peer-checked:bg-accent-indigo transition-colors"></div>
+                    <div className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform peer-checked:translate-x-5"></div>
+                  </div>
+                  <span className="text-sm font-semibold font-sans-tight text-secondary-slate uppercase">Show in Invoice</span>
+                </label>
+              </div>
             )}
           </div>
 
@@ -726,7 +748,7 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
           }}>
 
             {/* Logo */}
-            {logo && (
+            {logo && showLogo && (
               <div style={{ marginBottom: '40px' }}>
                 <img src={logo} alt="Company Logo" style={{ height: '48px', objectFit: 'contain' }} />
               </div>

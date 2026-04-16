@@ -60,7 +60,7 @@ export default function Home() {
             </p>
             <button
               onClick={() => setAppStarted(true)}
-              className="button-magnetic bg-secondary-slate hover:bg-black text-white px-10 py-6 rounded-smooth font-bold font-sans-tight text-xl md:text-2xl flex items-center w-max gap-6 transition-all shadow-lg"
+              className="button-magnetic bg-secondary-slate hover:bg-black text-white px-10 py-6 rounded-smooth font-bold font-sans-tight text-xl md:text-2xl flex items-center w-max gap-6 transition-all shadow-lg mb-6"
             >
               <span>Initialize Protocol</span>
               <span className="font-mono-data text-sm opacity-80 blink">→_</span>
