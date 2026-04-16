@@ -22,18 +22,16 @@ interface LineItem {
 
 interface InvoiceData {
   id?: string;
-  companyName: string;
   clientName: string;
-  address: string;
-  email: string;
-  contact: string;
   billedBy: {
+    company: string;
     name: string;
     address: string;
     email: string;
     phone: string;
   };
   billedTo: {
+    company: string;
     name: string;
     address: string;
     email: string;
@@ -67,18 +65,16 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
   const logoInputRef = useRef<HTMLInputElement>(null);
 
   const [invoice, setInvoice] = useState<InvoiceData>({
-    companyName: 'Root Node Studio',
     clientName: '',
-    address: '389 Bridge Ave, Windsor ON, N9B 2M3',
-    email: '',
-    contact: '',
     billedBy: {
+      company: 'Root Node Studio',
       name: 'Chetan Thakur',
       address: '389 Bridge Ave, Windsor ON, N9B 2M3',
       email: 'tchetan308@gmail.com',
       phone: '5199657469',
     },
     billedTo: {
+      company: '',
       name: '',
       address: '',
       email: '',
@@ -283,13 +279,9 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
   const resetInvoice = () => {
     const counter = parseInt(localStorage.getItem('invoiceCounter') || '0') + 1;
     setInvoice({
-      companyName: 'Root Node Studio',
       clientName: '',
-      address: '389 Bridge Ave, Windsor ON, N9B 2M3',
-      email: '',
-      contact: '',
-      billedBy: { name: 'Chetan Thakur', address: '389 Bridge Ave, Windsor ON, N9B 2M3', email: 'tchetan308@gmail.com', phone: '5199657469' },
-      billedTo: { name: '', address: '', email: '', phone: '' },
+      billedBy: { company: 'Root Node Studio', name: 'Chetan Thakur', address: '389 Bridge Ave, Windsor ON, N9B 2M3', email: 'tchetan308@gmail.com', phone: '5199657469' },
+      billedTo: { company: '', name: '', address: '', email: '', phone: '' },
       invoiceNumber: counter,
       invoiceDate: new Date().toISOString().split('T')[0],
       dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
@@ -440,32 +432,35 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
             )}
           </div>
 
-          {/* Company Name */}
-          <div className="mb-6 pb-4 border-b border-slate">
-            <label className="block text-primary font-semibold font-sans-tight mb-2 text-sm uppercase tracking-wide">Company Name</label>
-            <input
-              type="text"
-              value={invoice.companyName}
-              onChange={(e) => setInvoice({ ...invoice, companyName: e.target.value })}
-              className="w-full bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue font-sans"
-            />
-          </div>
+
 
           {/* Billed By / Billed To Section */}
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             <div>
               <h3 className="text-lg font-bold font-sans-tight text-primary mb-4">Billed By</h3>
               <div className="space-y-3">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  value={invoice.billedBy.name}
-                  onChange={(e) => setInvoice({
-                    ...invoice,
-                    billedBy: { ...invoice.billedBy, name: e.target.value }
-                  })}
-                  className="w-full bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue font-sans placeholder:text-muted"
-                />
+                <div className="grid grid-cols-2 gap-3">
+                  <input
+                    type="text"
+                    placeholder="Company Name (optional)"
+                    value={invoice.billedBy.company}
+                    onChange={(e) => setInvoice({
+                      ...invoice,
+                      billedBy: { ...invoice.billedBy, company: e.target.value }
+                    })}
+                    className="w-full bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue font-sans placeholder:text-muted"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    value={invoice.billedBy.name}
+                    onChange={(e) => setInvoice({
+                      ...invoice,
+                      billedBy: { ...invoice.billedBy, name: e.target.value }
+                    })}
+                    className="w-full bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue font-sans placeholder:text-muted"
+                  />
+                </div>
                 <textarea
                   placeholder="Address"
                   value={invoice.billedBy.address}
@@ -502,16 +497,28 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
             <div>
               <h3 className="text-lg font-bold font-sans-tight text-primary mb-4">Billed To</h3>
               <div className="space-y-3">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  value={invoice.billedTo.name}
-                  onChange={(e) => setInvoice({
-                    ...invoice,
-                    billedTo: { ...invoice.billedTo, name: e.target.value }
-                  })}
-                  className="w-full bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue font-sans placeholder:text-muted"
-                />
+                <div className="grid grid-cols-2 gap-3">
+                  <input
+                    type="text"
+                    placeholder="Company Name (optional)"
+                    value={invoice.billedTo.company}
+                    onChange={(e) => setInvoice({
+                      ...invoice,
+                      billedTo: { ...invoice.billedTo, company: e.target.value }
+                    })}
+                    className="w-full bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue font-sans placeholder:text-muted"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    value={invoice.billedTo.name}
+                    onChange={(e) => setInvoice({
+                      ...invoice,
+                      billedTo: { ...invoice.billedTo, name: e.target.value }
+                    })}
+                    className="w-full bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue font-sans placeholder:text-muted"
+                  />
+                </div>
                 <textarea
                   placeholder="Address"
                   value={invoice.billedTo.address}
@@ -761,7 +768,7 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
                 <p style={{ fontSize: '15px', color: '#555555', margin: 0 }}>#{invoice.invoiceNumber}</p>
               </div>
               <div style={{ textAlign: 'right' }}>
-                <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#111111', margin: '0 0 12px 0', letterSpacing: '-0.02em' }}>{invoice.companyName}</h2>
+                <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#111111', margin: '0 0 12px 0', letterSpacing: '-0.02em' }}>{invoice.billedBy.company}</h2>
                 <p style={{ fontWeight: 600, color: '#111111', margin: '0 0 4px 0', fontSize: '13px' }}>{invoice.billedBy.name}</p>
                 <p style={{ color: '#555555', margin: '0 0 4px 0', fontSize: '12px', whiteSpace: 'pre-line' }}>{invoice.billedBy.address}</p>
                 <p style={{ color: '#555555', margin: '0 0 4px 0', fontSize: '12px' }}>{invoice.billedBy.email}</p>
@@ -772,6 +779,9 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
             {/* Bill To */}
             <div style={{ backgroundColor: '#f7f7f5', border: '1px solid #eeeeee', borderRadius: '8px', padding: '24px', marginBottom: '36px' }}>
               <h3 style={{ fontSize: '11px', fontWeight: 700, color: '#111111', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 12px 0' }}>Bill To</h3>
+              {invoice.billedTo.company && (
+                <p style={{ fontWeight: 700, color: '#111111', fontSize: '16px', margin: '0 0 4px 0' }}>{invoice.billedTo.company}</p>
+              )}
               <p style={{ fontWeight: 600, color: '#111111', fontSize: '15px', margin: '0 0 6px 0' }}>{invoice.billedTo.name}</p>
               <p style={{ color: '#555555', fontSize: '12px', margin: '0 0 4px 0', whiteSpace: 'pre-line' }}>{invoice.billedTo.address}</p>
               <p style={{ color: '#555555', fontSize: '12px', margin: '0 0 4px 0' }}>{invoice.billedTo.email}</p>
