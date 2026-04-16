@@ -56,7 +56,7 @@ export default function Home() {
               <span className="font-serif-drama text-accent-indigo inline-block mt-2 sm:-mt-4 italic">Ledger.</span>
             </h1>
             <p className="text-lg md:text-2xl font-sans text-text-secondary mb-16 max-w-2xl leading-relaxed">
-              Raw precision generation. No abstractions. Output accurate financial signals directly to the grid.
+              Raw precision generation. No abstractions
             </p>
             <button
               onClick={() => setAppStarted(true)}
