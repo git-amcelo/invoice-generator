@@ -1,26 +1,165 @@
 @import "tailwindcss";
 
+/* Professional Modern Design System - Brutalist Signal Preset */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary-dark: #ffffff;
+  --primary-slate: #fcfaf8;
+  --secondary-slate: #1a1a1a;
+  --accent-blue: #000000;
+  --accent-indigo: #2563eb;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --border-color: #e5e5e5;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+
+html, body {
+  height: 100%;
+  width: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--primary-dark);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+
+/* Dark mode overrides removed for Brutalist static identity */
+.dark body {
+  background: var(--primary-dark);
+  color: var(--text-primary);
+}
+
+/* Typography System */
+.font-serif-drama {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+.font-sans-tight {
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+.font-mono-data {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Modern Color System */
+.text-primary-dark { color: var(--primary-dark); }
+.text-primary-slate { color: var(--primary-slate); }
+.text-accent-blue { color: var(--accent-blue); }
+.text-accent-indigo { color: var(--accent-indigo); }
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+
+.bg-primary-dark { background-color: var(--primary-dark); }
+.bg-primary-slate { background-color: var(--primary-slate); }
+.bg-secondary-slate { background-color: var(--secondary-slate); }
+.bg-card { background-color: var(--bg-card); }
+.bg-input { background-color: var(--bg-input); }
+.bg-accent-blue { background-color: var(--accent-blue); }
+.bg-accent-indigo { background-color: var(--accent-indigo); }
+.bg-success { background-color: var(--success); }
+.bg-danger { background-color: var(--danger); }
+
+.border-slate { border-color: var(--border-color); }
+.border-accent-blue { border-color: var(--accent-blue); }
+
+/* Claude-like Modern Card Design */
+.modern-card {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.modern-card:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Rounded Corner System - High Radius matching Cinematic flow */
+.rounded-smooth { border-radius: 0.75rem; }
+.rounded-medium { border-radius: 1rem; }
+.rounded-large { border-radius: 1.5rem; }
+
+/* Modern Micro-Interactions */
+.button-magnetic {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.button-magnetic:hover {
+  transform: translateY(-1px);
+}
+
+.button-magnetic:active {
+  transform: translateY(0);
+}
+
+/* Modern Form Improvements */
+input, textarea, select {
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--accent-indigo);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.05);
+}
+
+input:hover, textarea:hover, select:hover {
+  border-color: #d1d5db;
+}
+
+/* Modern Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary-slate);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-slate);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue);
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
 }
