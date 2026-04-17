@@ -562,7 +562,7 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
 
           {/* Invoice Details */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-            <div>
+            <div className="min-w-0">
               <label className="block text-primary font-semibold font-sans-tight mb-2 text-sm uppercase tracking-wide">Invoice #</label>
               <input
                 type="number"
@@ -571,7 +571,7 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
                 className="w-full bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue"
               />
             </div>
-            <div>
+            <div className="min-w-0">
               <label className="block text-primary font-semibold font-sans-tight mb-2 text-sm uppercase tracking-wide">Invoice Date</label>
               <input
                 type="date"
@@ -580,7 +580,7 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
                 className="w-full bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue"
               />
             </div>
-            <div>
+            <div className="min-w-0">
               <label className="block text-primary font-semibold font-sans-tight mb-2 text-sm uppercase tracking-wide">Due Date</label>
               <input
                 type="date"
@@ -589,7 +589,7 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
                 className="w-full bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue"
               />
             </div>
-            <div>
+            <div className="min-w-0">
               <label className="block text-primary font-semibold font-sans-tight mb-2 text-sm uppercase tracking-wide">Currency</label>
               <select
                 value={invoice.currency}
