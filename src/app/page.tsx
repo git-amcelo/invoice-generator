@@ -81,10 +81,10 @@ export default function Home() {
   return (
     <div className="min-h-screen transition-colors bg-primary-slate">
       {/* Header - Modern Floating Island */}
-      <div className="fixed top-0 left-0 right-0 z-40 modern-card rounded-none border-t-0 border-l-0 border-r-0">
-        <div className="flex items-center justify-between px-3 sm:px-6 py-4 max-w-7xl mx-auto">
-          <h1 className="text-base sm:text-2xl font-bold font-sans-tight text-secondary-slate uppercase tracking-tighter">
-            INVOICE<span className="text-accent-indigo">_</span><span className="hidden sm:inline">PROTOCOL</span>
+      <div className="fixed top-0 left-0 right-0 z-40 modern-card rounded-none border-t-0 border-l-0 border-r-0 overflow-x-hidden">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 max-w-7xl mx-auto">
+          <h1 className="text-2xl font-bold font-sans-tight text-secondary-slate uppercase tracking-tighter">
+            INVOICE<span className="text-accent-indigo">_</span>PROTOCOL
           </h1>
           <div className="flex items-center gap-4">
             <button
@@ -95,7 +95,7 @@ export default function Home() {
             </button>
             <button
               onClick={() => setShowAdminModal(true)}
-              className="button-magnetic px-5 py-2 rounded-smooth bg-secondary-slate hover:bg-black text-white font-semibold font-sans-tight transition-all min-w-[100px] uppercase text-sm shadow-md"
+              className="button-magnetic px-5 py-2 rounded-smooth bg-secondary-slate hover:bg-black text-white font-semibold font-sans-tight transition-all min-w-25 uppercase text-sm shadow-md"
             >
               {isAdmin ? 'SYS_ADMIN' : 'SYS_LOGIN'}
             </button>
@@ -104,7 +104,7 @@ export default function Home() {
       </div>
 
       {/* Main Content - Full Width */}
-      <main className="pt-24 pb-12 min-h-screen max-w-7xl mx-auto px-4">
+      <main className="pt-24 pb-12 min-h-screen w-full max-w-7xl mx-auto px-4 sm:px-6 overflow-x-hidden">
         <InvoiceGenerator />
       </main>
 

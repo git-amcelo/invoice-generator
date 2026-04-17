@@ -307,54 +307,54 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
 
   if (showPreviousInvoices && isAdmin) {
     return (
-      <div className="min-h-screen bg-primary-dark p-4 sm:p-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap justify-between items-center gap-3 mb-8">
+      <div className="min-h-screen bg-primary-dark p-4 sm:p-6 md:p-8 overflow-x-hidden">
+        <div className="w-full max-w-6xl mx-auto">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
             <h1 className="text-2xl sm:text-4xl font-bold font-sans-tight text-primary">Previous Invoices</h1>
             <button
               onClick={() => setShowPreviousInvoices(false)}
-              className="button-magnetic bg-accent-blue hover:bg-accent-indigo text-white px-4 sm:px-6 py-2 sm:py-3 rounded-smooth font-semibold font-sans-tight transition-all text-sm sm:text-base"
+              className="button-magnetic bg-accent-blue hover:bg-accent-indigo text-white px-4 sm:px-6 py-2 sm:py-3 rounded-smooth font-semibold font-sans-tight transition-all"
             >
               ← Back to Generator
             </button>
           </div>
 
           {savedInvoices.length === 0 ? (
-            <div className="text-center py-20 modern-card rounded-medium">
-              <p className="text-2xl text-secondary font-serif-drama">No invoices saved yet</p>
+            <div className="text-center py-12 sm:py-20 modern-card rounded-medium">
+              <p className="text-lg sm:text-2xl text-secondary font-serif-drama">No invoices saved yet</p>
             </div>
           ) : (
             <div className="grid gap-4">
               {savedInvoices.map((inv) => (
-                <div key={inv.id} className="modern-card rounded-medium p-6 border border-slate hover:border-accent-blue transition-all">
-                  <div className="flex flex-wrap justify-between items-start gap-3">
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-xl font-bold font-sans-tight text-primary">Invoice #{inv.invoiceNumber}</h3>
-                      <p className="text-secondary mt-1">{inv.clientName || 'No client name'}</p>
+                <div key={inv.id} className="modern-card rounded-medium p-4 sm:p-6 border border-slate hover:border-accent-blue transition-all">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <div className="flex-1">
+                      <h3 className="text-lg sm:text-xl font-bold font-sans-tight text-primary">Invoice #{inv.invoiceNumber}</h3>
+                      <p className="text-secondary mt-1 text-sm sm:text-base">{inv.clientName || 'No client name'}</p>
                       <p className="text-muted text-sm mt-1">{inv.invoiceDate}</p>
                     </div>
-                    <div className="text-right shrink-0">
+                    <div className="text-right w-full sm:w-auto">
                       <p className="text-xl sm:text-2xl font-bold text-accent-blue font-serif-drama">
                         {inv.currency} {inv.lineItems.reduce((sum, item) => sum + (item.quantity * item.rate), 0).toFixed(2)}
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-3 mt-4 justify-end">
+                  <div className="flex flex-wrap gap-2 sm:gap-3 mt-4 justify-end">
                     <button
                       onClick={() => editInvoice(inv)}
-                      className="button-magnetic bg-accent-blue hover:bg-accent-indigo text-white px-4 py-2 rounded-smooth font-semibold font-sans-tight transition-all"
+                      className="button-magnetic bg-accent-blue hover:bg-accent-indigo text-white px-3 sm:px-4 py-2 rounded-smooth font-semibold font-sans-tight transition-all text-sm"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => duplicateInvoice(inv)}
-                      className="button-magnetic bg-success hover:bg-green-600 text-white px-4 py-2 rounded-smooth font-semibold font-sans-tight transition-all"
+                      className="button-magnetic bg-success hover:bg-green-600 text-white px-3 sm:px-4 py-2 rounded-smooth font-semibold font-sans-tight transition-all text-sm"
                     >
                       Duplicate
                     </button>
                     <button
                       onClick={() => deleteInvoice(inv.id!)}
-                      className="button-magnetic bg-danger hover:bg-red-600 text-white px-4 py-2 rounded-smooth font-semibold font-sans-tight transition-all"
+                      className="button-magnetic bg-danger hover:bg-red-600 text-white px-3 sm:px-4 py-2 rounded-smooth font-semibold font-sans-tight transition-all text-sm"
                     >
                       Delete
                     </button>
@@ -369,23 +369,23 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
   }
 
   return (
-    <div className="min-h-screen bg-primary-dark">
-      <div className="w-full px-4 py-6">
+    <div className="min-h-screen bg-primary-dark overflow-x-hidden">
+      <div className="w-full max-w-6xl mx-auto px-3 sm:px-4 py-6">
         {/* Header */}
-        <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
           <h1 className="text-2xl sm:text-3xl font-bold font-sans-tight text-primary">Invoice Generator</h1>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex gap-3 w-full sm:w-auto">
             {isAdmin && (
               <button
                 onClick={() => setShowPreviousInvoices(true)}
-                className="button-magnetic bg-accent-blue hover:bg-accent-indigo text-white px-4 py-2 rounded-smooth font-semibold font-sans-tight transition-all text-sm"
+                className="button-magnetic bg-accent-blue hover:bg-accent-indigo text-white px-4 py-2 rounded-smooth font-semibold font-sans-tight transition-all flex-1 sm:flex-none"
               >
-                Previous Invoices
+                Previous
               </button>
             )}
             <button
               onClick={resetInvoice}
-              className="button-magnetic bg-secondary-slate hover:bg-gray-600 text-white px-4 py-2 rounded-smooth font-semibold font-sans-tight transition-all text-sm"
+              className="button-magnetic bg-secondary-slate hover:bg-gray-600 text-white px-4 py-2 rounded-smooth font-semibold font-sans-tight transition-all flex-1 sm:flex-none"
             >
               New Invoice
             </button>
@@ -393,7 +393,7 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
         </div>
 
         {/* Invoice Form - Full Width Modern Card */}
-        <div className="modern-card rounded-medium p-6 shadow-2xl w-full">
+        <div className="modern-card rounded-medium p-4 sm:p-6 md:p-8 shadow-2xl w-full overflow-x-hidden">
           {/* Logo Upload - Separate Section */}
           <div className="mb-6 flex flex-wrap items-center gap-4 border-b border-slate pb-6">
             <div className="flex flex-col gap-2">
@@ -435,7 +435,7 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
 
 
           {/* Billed By / Billed To Section */}
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
             <div>
               <h3 className="text-lg font-bold font-sans-tight text-primary mb-4">Billed By</h3>
               <div className="space-y-3">
@@ -561,8 +561,8 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
           </button>
 
           {/* Invoice Details */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-            <div className="min-w-0">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+            <div>
               <label className="block text-primary font-semibold font-sans-tight mb-2 text-sm uppercase tracking-wide">Invoice #</label>
               <input
                 type="number"
@@ -608,38 +608,42 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
             <h3 className="text-lg font-bold font-sans-tight text-primary mb-4">Line Items</h3>
             <div className="flex flex-col gap-3">
               {invoice.lineItems.map((item) => (
-                <div key={item.id} className="grid grid-cols-12 gap-2 sm:gap-3 items-center border border-slate rounded-smooth p-3 sm:p-0 sm:border-0 sm:rounded-none">
+                <div key={item.id} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
                   <input
                     type="text"
                     placeholder="Description"
                     value={item.description}
                     onChange={(e) => updateLineItem(item.id, 'description', e.target.value)}
-                    className="col-span-12 sm:col-span-6 bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue placeholder:text-muted"
+                    className="sm:col-span-6 bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue placeholder:text-muted"
                   />
-                  <input
-                    type="number"
-                    placeholder="Qty"
-                    value={item.quantity}
-                    onChange={(e) => updateLineItem(item.id, 'quantity', parseInt(e.target.value) || 0)}
-                    className="col-span-3 sm:col-span-2 bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue font-sans placeholder:text-muted"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Rate"
-                    value={item.rate}
-                    onChange={(e) => updateLineItem(item.id, 'rate', parseFloat(e.target.value) || 0)}
-                    className="col-span-3 sm:col-span-2 bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue placeholder:text-muted"
-                  />
-                  <div className="col-span-4 sm:col-span-1 text-primary text-center font-semibold font-sans-tight py-2">
-                    {(item.quantity * item.rate).toFixed(2)}
+                  <div className="grid grid-cols-2 gap-3 sm:col-span-4">
+                    <input
+                      type="number"
+                      placeholder="Qty"
+                      value={item.quantity}
+                      onChange={(e) => updateLineItem(item.id, 'quantity', parseInt(e.target.value) || 0)}
+                      className="bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue font-sans placeholder:text-muted"
+                    />
+                    <input
+                      type="number"
+                      placeholder="Rate"
+                      value={item.rate}
+                      onChange={(e) => updateLineItem(item.id, 'rate', parseFloat(e.target.value) || 0)}
+                      className="bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue placeholder:text-muted"
+                    />
                   </div>
-                  <button
-                    onClick={() => removeLineItem(item.id)}
-                    className="col-span-2 sm:col-span-1 bg-danger hover:bg-red-700 text-white px-1 py-2 rounded-smooth button-magnetic transition-all"
-                    disabled={invoice.lineItems.length === 1}
-                  >
-                    ✕
-                  </button>
+                  <div className="sm:col-span-2 flex items-center justify-between gap-2">
+                    <div className="text-primary font-semibold font-sans-tight py-2">
+                      {(item.quantity * item.rate).toFixed(2)}
+                    </div>
+                    <button
+                      onClick={() => removeLineItem(item.id)}
+                      className="bg-danger hover:bg-red-700 text-white px-3 py-2 rounded-smooth button-magnetic transition-all"
+                      disabled={invoice.lineItems.length === 1}
+                    >
+                      ✕
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
