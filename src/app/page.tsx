@@ -84,7 +84,7 @@ export default function Home() {
       <div className="fixed top-0 left-0 right-0 z-40 modern-card rounded-none border-t-0 border-l-0 border-r-0">
         <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 max-w-7xl mx-auto gap-2">
           <h1 className="text-base sm:text-2xl font-bold font-sans-tight text-secondary-slate uppercase tracking-tighter truncate">
-            INVOICE<span className="text-accent-indigo">_</span><span className="hidden xs:inline sm:inline">PROTOCOL</span>
+            INVOICE<span className="text-accent-indigo">_</span><span className="hidden sm:inline">PROTOCOL</span>
           </h1>
           <div className="flex items-center gap-2 sm:gap-4 shrink-0">
             <button

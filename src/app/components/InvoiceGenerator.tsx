@@ -743,7 +743,7 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
         </div>
 
         {/* Invoice Preview — 100% inline styles for html2canvas compatibility */}
-        <div className="mt-12 shadow-2xl max-w-4xl mx-auto overflow-x-auto" style={{ backgroundColor: '#ffffff', borderRadius: '24px', padding: '32px' }}>
+        <div className="mt-12 shadow-2xl max-w-4xl mx-auto overflow-x-auto p-4 sm:p-8" style={{ backgroundColor: '#ffffff', borderRadius: '24px' }}>
           <div id="invoice-preview" style={{
             backgroundColor: '#ffffff',
             width: '620px',
