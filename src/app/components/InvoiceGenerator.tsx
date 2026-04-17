@@ -608,40 +608,38 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
             <h3 className="text-lg font-bold font-sans-tight text-primary mb-4">Line Items</h3>
             <div className="flex flex-col gap-3">
               {invoice.lineItems.map((item) => (
-                <div key={item.id} className="flex flex-col gap-2 sm:grid sm:grid-cols-12 sm:gap-3 sm:items-center border border-slate rounded-smooth p-3 sm:p-0 sm:border-0 sm:rounded-none">
+                <div key={item.id} className="grid grid-cols-12 gap-2 sm:gap-3 items-center border border-slate rounded-smooth p-3 sm:p-0 sm:border-0 sm:rounded-none">
                   <input
                     type="text"
                     placeholder="Description"
                     value={item.description}
                     onChange={(e) => updateLineItem(item.id, 'description', e.target.value)}
-                    className="w-full sm:col-span-6 bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue placeholder:text-muted"
+                    className="col-span-12 sm:col-span-6 bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue placeholder:text-muted"
                   />
-                  <div className="flex gap-2 items-center sm:contents">
-                    <input
-                      type="number"
-                      placeholder="Qty"
-                      value={item.quantity}
-                      onChange={(e) => updateLineItem(item.id, 'quantity', parseInt(e.target.value) || 0)}
-                      className="flex-1 sm:col-span-2 bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue font-sans placeholder:text-muted"
-                    />
-                    <input
-                      type="number"
-                      placeholder="Rate"
-                      value={item.rate}
-                      onChange={(e) => updateLineItem(item.id, 'rate', parseFloat(e.target.value) || 0)}
-                      className="flex-1 sm:col-span-2 bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue placeholder:text-muted"
-                    />
-                    <div className="w-16 sm:col-span-1 text-primary text-center font-semibold font-sans-tight py-2 shrink-0">
-                      {(item.quantity * item.rate).toFixed(2)}
-                    </div>
-                    <button
-                      onClick={() => removeLineItem(item.id)}
-                      className="sm:col-span-1 bg-danger hover:bg-red-700 text-white px-2 py-2 rounded-smooth button-magnetic transition-all shrink-0"
-                      disabled={invoice.lineItems.length === 1}
-                    >
-                      ✕
-                    </button>
+                  <input
+                    type="number"
+                    placeholder="Qty"
+                    value={item.quantity}
+                    onChange={(e) => updateLineItem(item.id, 'quantity', parseInt(e.target.value) || 0)}
+                    className="col-span-3 sm:col-span-2 bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue font-sans placeholder:text-muted"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Rate"
+                    value={item.rate}
+                    onChange={(e) => updateLineItem(item.id, 'rate', parseFloat(e.target.value) || 0)}
+                    className="col-span-3 sm:col-span-2 bg-input border border-slate text-primary px-3 py-2 rounded-smooth focus:outline-none focus:ring-2 focus:ring-accent-blue placeholder:text-muted"
+                  />
+                  <div className="col-span-4 sm:col-span-1 text-primary text-center font-semibold font-sans-tight py-2">
+                    {(item.quantity * item.rate).toFixed(2)}
                   </div>
+                  <button
+                    onClick={() => removeLineItem(item.id)}
+                    className="col-span-2 sm:col-span-1 bg-danger hover:bg-red-700 text-white px-1 py-2 rounded-smooth button-magnetic transition-all"
+                    disabled={invoice.lineItems.length === 1}
+                  >
+                    ✕
+                  </button>
                 </div>
               ))}
             </div>
