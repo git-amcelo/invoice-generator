@@ -36,8 +36,8 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-primary-dark overflow-hidden flex flex-col relative selection:bg-accent-indigo selection:text-white">
         {/* Floating Nav */}
-        <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 modern-card px-8 py-4 rounded-full flex items-center justify-between w-[95%] max-w-7xl">
-          <div className="text-2xl font-bold font-sans-tight text-secondary-slate tracking-tighter uppercase">
+        <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 modern-card px-4 sm:px-8 py-4 rounded-full flex items-center justify-between w-[95%] max-w-7xl">
+          <div className="text-xl sm:text-2xl font-bold font-sans-tight text-secondary-slate tracking-tighter uppercase">
             INVOICE<span className="text-accent-indigo">_</span>
           </div>
           <button
@@ -82,9 +82,9 @@ export default function Home() {
     <div className="min-h-screen transition-colors bg-primary-slate">
       {/* Header - Modern Floating Island */}
       <div className="fixed top-0 left-0 right-0 z-40 modern-card rounded-none border-t-0 border-l-0 border-r-0">
-        <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-          <h1 className="text-2xl font-bold font-sans-tight text-secondary-slate uppercase tracking-tighter">
-            INVOICE<span className="text-accent-indigo">_</span>PROTOCOL
+        <div className="flex items-center justify-between px-3 sm:px-6 py-4 max-w-7xl mx-auto">
+          <h1 className="text-base sm:text-2xl font-bold font-sans-tight text-secondary-slate uppercase tracking-tighter">
+            INVOICE<span className="text-accent-indigo">_</span><span className="hidden sm:inline">PROTOCOL</span>
           </h1>
           <div className="flex items-center gap-4">
             <button
