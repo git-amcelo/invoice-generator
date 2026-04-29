@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import DOMPurify from 'dompurify';
 import 'react-quill/dist/quill.snow.css';
@@ -97,6 +97,11 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
     notes: '',
     bankDetails: '',
   });
+
+  const sanitizedBankDetails = useMemo(
+    () => DOMPurify.sanitize(invoice.bankDetails),
+    [invoice.bankDetails]
+  );
 
   useEffect(() => {
     setMounted(true);
@@ -872,7 +877,7 @@ export default function InvoiceGenerator({}: InvoiceGeneratorProps = {}) {
               <div style={{ marginBottom: '20px', paddingTop: '20px', borderTop: '1px solid #eeeeee' }}>
                 <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#111111', textTransform: 'uppercase', letterSpacing: '0.06em', margin: '0 0 8px 0' }}>Payment Instructions</h4>
                 <p style={{ fontSize: '11px', color: '#888888', fontStyle: 'italic', margin: '0 0 12px 0' }}>Please include Invoice #{invoice.invoiceNumber} in the reference field during transfer.</p>
-                <div style={{ fontSize: '12px', color: '#555555', margin: 0, lineHeight: '1.7' }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(invoice.bankDetails) }} />
+                <div style={{ fontSize: '12px', color: '#555555', margin: 0, lineHeight: '1.7' }} dangerouslySetInnerHTML={{ __html: sanitizedBankDetails }} />
               </div>
             )}
 
